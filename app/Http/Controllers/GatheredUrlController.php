@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\CollectedUrl;
-use App\Services\CollectedUrlService;
 use App\Services\CollectUrlService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -43,7 +42,7 @@ class GatheredUrlController extends Controller
                 return redirect('/')->withErrors($isValid)->withInput();
             }
 
-            $collectUrlService->store($data);
+            return $collectUrlService->store($data);
             return redirect('/')->with('success', 'The URL is sent to your email');
         } catch (\Throwable $th) {
             return $th->getMessage();
