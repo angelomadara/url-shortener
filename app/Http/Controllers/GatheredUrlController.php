@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SaveUrl;
 use App\Models\CollectedUrl;
 use App\Services\CollectUrlService;
 use Illuminate\Http\Request;
@@ -42,7 +43,8 @@ class GatheredUrlController extends Controller
                 return redirect('/')->withErrors($isValid)->withInput();
             }
 
-            return $collectUrlService->store($data);
+            $collectUrlService->store($data);
+            // SaveUrl::dispatch($data);
             return redirect('/')->with('success', 'The URL is sent to your email');
         } catch (\Throwable $th) {
             return $th->getMessage();

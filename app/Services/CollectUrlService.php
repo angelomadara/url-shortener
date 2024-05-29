@@ -25,8 +25,12 @@ class CollectUrlService {
       'email' => $data['email']
     ]);
 
+    \Mail::send('emails.shortURL', ['shortURL' => $shortURLObject->default_short_url], function ($message) use ($data) {
+      $message->to($data['email'])->subject('Short URL');
+    });
+
     if ($response) {
-      return $response;
+      return $shortURLObject;
     }
 
     throw new \Exception('Failed to store data');
