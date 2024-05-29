@@ -30,22 +30,5 @@ class SaveUrl implements ShouldQueue
         $request = $this->request_data;
 
         $response = $collectUrlService->store($request);
-
-        $email = $request['email'];
-        \Log::info('Email: ', [$email]);
-
-        // Send email if email is provided
-        if ($email) {
-            $urlKey = $response->url_key; 
-
-            $data = [
-                'shortURL' => $urlKey,
-            ];
-
-            \Mail::send('emails.shortURL', $data, function ($message) use ($email) {
-                $message->to($email)->subject('Short URL');
-            });
-        }
-        
     }
 }

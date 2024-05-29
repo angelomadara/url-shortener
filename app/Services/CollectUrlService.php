@@ -3,7 +3,7 @@ namespace App\Services;
 
 use App\Models\CollectedUrl;
 use AshAllenDesign\ShortURL\Classes\Builder;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class CollectUrlService {
 
@@ -25,7 +25,9 @@ class CollectUrlService {
       'email' => $data['email']
     ]);
 
-    \Mail::send('emails.shortURL', ['shortURL' => $shortURLObject->default_short_url], function ($message) use ($data) {
+    $shortUrl = "http://localhost:8000/u/".$shortURLObject->url_key;
+
+    Mail::send('emails.shortURL', ['shortURL' => $shortUrl], function ($message) use ($data) {
       $message->to($data['email'])->subject('Short URL');
     });
 

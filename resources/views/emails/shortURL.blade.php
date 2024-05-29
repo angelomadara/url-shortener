@@ -17,13 +17,12 @@
 
       <div class="row align-items-center flex flex-column pt-4" action="/save" method="post">
         <div class="col-6">
-          <h1 class="h3 mb-3 fw-normal">Create a shortend URL App</h1>
+          <h1 class="h3 mb-3 fw-normal">Shortend URL</h1>
           <div class="pb-4">
-            We just created a short URL for you. Here is the link:
+            We've just created a short URL for you. Here is the link:
           </div>
-          {{$shortURL}}
           <div class="pb-4">
-            <a href="http://localhost/url/">Visit your URL</a>
+            <a href="{{$shortURL}}">{{$shortURL}}</a>
           </div>
         </div>
       </div>

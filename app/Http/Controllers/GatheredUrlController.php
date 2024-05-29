@@ -43,8 +43,8 @@ class GatheredUrlController extends Controller
                 return redirect('/')->withErrors($isValid)->withInput();
             }
 
-            $collectUrlService->store($data);
-            // SaveUrl::dispatch($data);
+            // $collectUrlService->store($data);
+            SaveUrl::dispatch($data);
             return redirect('/')->with('success', 'The URL is sent to your email');
         } catch (\Throwable $th) {
             return $th->getMessage();
